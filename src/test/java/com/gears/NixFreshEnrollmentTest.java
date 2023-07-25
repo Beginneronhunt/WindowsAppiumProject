@@ -42,7 +42,7 @@ public class NixFreshEnrollmentTest {
     }
     nixSession.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
     wait = new WebDriverWait(nixSession, 60);
-    }
+  }
 
   @AfterClass
   public void tearDown() {
@@ -64,8 +64,8 @@ public class NixFreshEnrollmentTest {
     return backBtnIcon;
   }
 
-  public void goToNixHomePage(){
-      WebElement backButton = nixSession.findElementByXPath(
+  public void goToNixHomePage() {
+    WebElement backButton = nixSession.findElementByXPath(
       "/Window/Custom/Button/Image"
     );
     backButton.click();
@@ -137,12 +137,12 @@ public class NixFreshEnrollmentTest {
       "EnableNix"
     );
     disableNix.click();
-   }
+  }
 
   public void enableNix() {
     WebElement enableNix = nixSession.findElementByAccessibilityId("EnableNix");
     enableNix.click();
-    }
+  }
 
   @Test(priority = 1)
   public void testConfigureNix() throws InterruptedException {
@@ -158,38 +158,38 @@ public class NixFreshEnrollmentTest {
       addServerPath();
       enableNix();
       Thread.sleep(30000);
-      goToNixHomePage();      
-      String nixServiceStatus= getNixServiceStatus();
+      goToNixHomePage();
+      String nixServiceStatus = getNixServiceStatus();
       assertThat(nixServiceStatus).containsIgnoringCase("Online");
-      } else {
+    } else {
       clickOnSettings();
       clickOnAccountID();
       addAccountId();
       clickOnServerPath();
       addServerPath();
       enableNix();
-      Thread.sleep(20000);
-      goToNixHomePage();      
-      String nixServiceStatus= getNixServiceStatus();
+      Thread.sleep(30000);
+      goToNixHomePage();
+      String nixServiceStatus = getNixServiceStatus();
       assertThat(nixServiceStatus).containsIgnoringCase("Online");
       nixSession.closeApp();
-      }
+    }
   }
 
   @Test(priority = 2)
   public void testAppTitle() throws InterruptedException {
-    Thread.sleep(10000);
+    Thread.sleep(15000);
     nixSession.launchApp();
     String agentName = getAppTitle();
     assertThat(agentName).isEqualTo("SureMDM Agent");
-    }
+  }
 
   @Test(priority = 3)
   public void testDisableNix() throws InterruptedException {
-    clickOnSettings();    
+    clickOnSettings();
     disableNix();
-    Thread.sleep(20000);
-    goToNixHomePage();      
+    Thread.sleep(30000);
+    goToNixHomePage();
     String nixServiceStatus = getNixServiceStatus();
     assertThat(nixServiceStatus).containsIgnoringCase("Stopped");
     nixSession.closeApp();
